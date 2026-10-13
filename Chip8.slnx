@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="Chip8/Chip8.csproj" />
+  <Project Path="Chip8Tests/Chip8Tests.csproj" />
+</Solution>
