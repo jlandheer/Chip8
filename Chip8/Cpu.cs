@@ -26,10 +26,10 @@ public class Cpu
     public Stack<ushort> Stack { get; private set; } = new();
     public ushort PC { get; private set; }
 
-    public void Load(byte[] program, ushort pc = 0x0200)
+    public void Load(byte[] program, ushort at = 0x0200)
     {
-        Array.Copy(program, 0, Ram, 0x200, program.Length);
-        PC = pc;
+        Array.Copy(program, 0, Ram, at, program.Length);
+        PC = at;
     }
 
     public void Step()
@@ -302,8 +302,8 @@ public class Cpu
                     }
                     break;
                 }
-                //default:
-                //throw new NotImplementedException($"Opcode {opCode:X} not implemented,");
+            default:
+                throw new NotImplementedException($"Opcode {opCode:X4} not implemented,");
         }
 
         if (incPC)

@@ -58,7 +58,7 @@ public class Display : IDisplay
             sb.Append(_padding);
             for (int col = 0; col < ScreenWidth; col++)
             {
-                sb.Append(_screen[row, col] ? "\u2103" : " ");
+                sb.Append(_screen[row, col] ? "*" : " ");
             }
             sb.AppendLine();
         }
