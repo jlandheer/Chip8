@@ -34,7 +34,7 @@ public class Cpu
 
     public void Step()
     {
-        if (PC >= 4096)
+        if (PC >= RamSize - 1)
         {
             Running = false;
             return;
@@ -217,8 +217,8 @@ public class Cpu
                 {
                     var x = (byte)((opCode & 0x0f00) >> 8);
                     var y = (byte)((opCode & 0x00f0) >> 4);
-                    var nibble = (byte)(opCode & 0x000f);
-                    V[0xf] = (byte)(_display.ShowSprite(Ram[I..(I + nibble)], V[x], V[y]) ? 1 : 0);
+                    var height = (byte)(opCode & 0x000f);
+                    V[0xf] = (byte)(_display.ShowSprite(Ram[I..(I + height)], V[x], V[y]) ? 1 : 0);
                     break;
                 }
             case >= 0xE000 and <= 0xEfff when (opCode & 0xff) == 0x9e:
@@ -269,7 +269,7 @@ public class Cpu
             case >= 0xF000 and <= 0xFfff when (opCode & 0xff) == 0x29:
                 {
                     var x = (byte)((opCode & 0x0f00) >> 8);
-                    I = (ushort)(5 * x);
+                    I = (ushort)(5 * V[x]);
                     break;
                 }
             case >= 0xF000 and <= 0xFfff when (opCode & 0xff) == 0x33:
